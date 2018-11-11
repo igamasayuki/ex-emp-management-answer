@@ -38,7 +38,9 @@
 						<li class="active"><a href="list.html">従業員管理</a></li>
 					</ul>
 					<p class="navbar-text navbar-right">
-						<a href="../administrator/login.html" class="navbar-link" th:href="@{/administrator/toLogin}">ログアウト</a>
+						<span th:text="${administratorName + 'さん'}">山田さん</span>こんにちは！
+						&nbsp;&nbsp;&nbsp;
+						<a href="../administrator/login.html" class="navbar-link" th:href="@{/administrator/logout}">ログアウト</a>
 					</p>
 				</div>
 				<!-- /.navbar-collapse -->
@@ -58,6 +60,12 @@
 				class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 col-sm-12 col-xs-12">
 				<!-- 背景をグレーに、埋め込んだようなコンポーネント -->
 				<div class="well">
+				
+				
+<!-- ここから上を編集する必要はありません -->
+
+<!-- ここにモックのform要素を貼り付けます -->
+
 					<form method="post" action="list.html" th:action="@{/employee/update}" th:object="${updateEmployeeForm}">
 						<fieldset>
 							<legend>従業員情報</legend>
@@ -160,14 +168,14 @@
 							<button type="submit" class="btn btn-primary">更新</button>
 						</fieldset>
 					</form>
+					
+					
+<!-- ここから下を編集する必要はありません -->
 				</div>
 			</div>
 		</div>
-		
-
 	</div>
 	<!-- end container -->
-	<footer>test</footer>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="../../static/js/bootstrap.min.js"></script>

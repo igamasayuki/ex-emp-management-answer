@@ -2,7 +2,6 @@ package jp.co.sample.emp_management.controller;
 
 import java.util.List;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -76,7 +75,7 @@ public class EmployeeController {
 	// ユースケース：従業員詳細を更新する
 	/////////////////////////////////////////////////////
 	/**
-	 * 従業員一覧画面を出力します.
+	 * 従業員詳細(ここでは扶養人数のみ)を更新します.
 	 * 
 	 * @param form
 	 *            従業員情報用フォーム

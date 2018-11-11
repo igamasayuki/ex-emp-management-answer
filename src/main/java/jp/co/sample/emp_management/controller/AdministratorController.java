@@ -1,5 +1,7 @@
 package jp.co.sample.emp_management.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.sample.emp_management.domain.Administrator;
+import jp.co.sample.emp_management.form.InsertAdministratorForm;
 import jp.co.sample.emp_management.form.LoginForm;
 import jp.co.sample.emp_management.service.AdministratorService;
 
@@ -19,11 +22,14 @@ import jp.co.sample.emp_management.service.AdministratorService;
  *
  */
 @Controller
-@RequestMapping("/administrator")
+@RequestMapping("/")
 public class AdministratorController {
 
 	@Autowired
 	private AdministratorService administratorService;
+	
+	@Autowired
+	private HttpSession session;
 
 	/**
 	 * 使用するフォームオブジェクトをリクエストスコープに格納する.
@@ -31,7 +37,12 @@ public class AdministratorController {
 	 * @return フォーム
 	 */
 	@ModelAttribute
-	public LoginForm setUpForm() {
+	public InsertAdministratorForm setUpInsertAdministratorForm() {
+		return new InsertAdministratorForm();
+	}
+	
+	@ModelAttribute
+	public LoginForm setUpLoginForm() {
 		return new LoginForm();
 	}
 
@@ -56,12 +67,12 @@ public class AdministratorController {
 	 * @return ログイン画面へリダイレクト
 	 */
 	@RequestMapping("/insert")
-	public String insert(LoginForm form) {
+	public String insert(InsertAdministratorForm form) {
 		Administrator administrator = new Administrator();
 		// フォームからドメインにプロパティ値をコピー
 		BeanUtils.copyProperties(form, administrator);
 		administratorService.insert(administrator);
-		return "redirect:/administrator/login";
+		return "redirect:/";
 	}
 
 	/////////////////////////////////////////////////////
@@ -93,6 +104,22 @@ public class AdministratorController {
 			result.addError(new ObjectError("loginError", "メールアドレスまたはパスワードが不正です。"));
 			return toLogin();
 		}
+		session.setAttribute("administratorName", administrator.getName());
 		return "forward:/employee/showList";
 	}
+	
+	/////////////////////////////////////////////////////
+	// ユースケース：ログアウトをする
+	/////////////////////////////////////////////////////
+	/**
+	 * ログアウトをします.
+	 * 
+	 * @return ログイン画面
+	 */
+	@RequestMapping(value = "/logout")
+	public String logout() {
+		session.invalidate();
+		return "redirect:/";
+	}
+	
 }
