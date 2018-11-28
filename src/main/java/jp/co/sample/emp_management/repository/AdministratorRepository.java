@@ -36,10 +36,6 @@ public class AdministratorRepository {
 	@Autowired
 	private NamedParameterJdbcTemplate template;
 
-	public Administrator load(Integer id) {
-		return null;
-	}
-
 	/**
 	 * メールアドレスとパスワードから管理者情報を取得します.
 	 * 

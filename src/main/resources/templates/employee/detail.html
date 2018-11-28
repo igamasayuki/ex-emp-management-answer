@@ -38,9 +38,9 @@
 						<li class="active"><a href="list.html">従業員管理</a></li>
 					</ul>
 					<p class="navbar-text navbar-right">
-						<span th:text="${administratorName + 'さん'}">山田さん</span>こんにちは！
+						<span th:text="${session.administratorName + 'さん'}">山田さん</span>こんにちは！
 						&nbsp;&nbsp;&nbsp;
-						<a href="../administrator/login.html" class="navbar-link" th:href="@{/administrator/logout}">ログアウト</a>
+						<a href="../administrator/login.html" class="navbar-link" th:href="@{/logout}">ログアウト</a>
 					</p>
 				</div>
 				<!-- /.navbar-collapse -->
@@ -75,7 +75,7 @@
 							      従業員名
 							    </th>
 							    <td>
-							     <span th:text="${employee.name}">山田太郎</span>
+							     <span th:text="${employee.name}">山田花子</span>
 							    </td>
 							  </tr>
 							  <tr>
@@ -83,7 +83,7 @@
 							      写真
 							    </th>
 							    <td>
-							      <img src="../../static/img/1.png" th:src="@{/img/1.png}"/>
+							      <img src="../../static/img/e2.png" th:src="${'/img/' + employee.image}" />
 							    </td>
 							  </tr>
 							  <tr>
@@ -91,7 +91,7 @@
 							      性別
 							    </th>
 							    <td>
-							      <span th:text="${employee.gender}">男性</span>
+							      <span th:text="${employee.gender}">女性</span>
 							    </td>
 							  </tr>
 							  <tr>

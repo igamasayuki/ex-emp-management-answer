@@ -83,7 +83,7 @@ public class AdministratorController {
 	 * 
 	 * @return ログイン画面
 	 */
-	@RequestMapping("/toLogin")
+	@RequestMapping("/")
 	public String toLogin() {
 		return "administrator/login";
 	}
