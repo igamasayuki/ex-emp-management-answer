@@ -1,15 +1,19 @@
 package jp.co.sample.emp_management.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import jp.co.sample.emp_management.domain.Administrator;
 import jp.co.sample.emp_management.form.InsertAdministratorForm;
+import jp.co.sample.emp_management.form.LoginForm;
 import jp.co.sample.emp_management.service.AdministratorService;
 
 /**
@@ -25,8 +29,8 @@ public class AdministratorController {
 	@Autowired
 	private AdministratorService administratorService;
 	
-//	@Autowired
-//	private HttpSession session;
+	@Autowired
+	private HttpSession session;
 
 	/**
 	 * 使用するフォームオブジェクトをリクエストスコープに格納する.
@@ -39,10 +43,10 @@ public class AdministratorController {
 	}
 	
 	//  (SpringSecurityに任せるためコメントアウトしました)
-//	@ModelAttribute
-//	public LoginForm setUpLoginForm() {
-//		return new LoginForm();
-//	}
+	@ModelAttribute
+	public LoginForm setUpLoginForm() {
+		return new LoginForm();
+	}
 
 	/////////////////////////////////////////////////////
 	// ユースケース：管理者を登録する
@@ -82,17 +86,12 @@ public class AdministratorController {
 	 * @return ログイン画面
 	 */
 	@RequestMapping("/")
-	public String toLogin(Model model,@RequestParam(required = false) String error) {
-		System.err.println("login error:" + error);
-		if (error != null) {
-			System.err.println("login failed");
-			model.addAttribute("errorMessage", "メールアドレスまたはパスワードが不正です。");
-		}
+	public String toLogin() {
 		return "administrator/login";
 	}
 
 	/**
-	 * ログインします. (SpringSecurityに任せるためコメントアウトしました)
+	 * ログインします.
 	 * 
 	 * @param form
 	 *            管理者情報用フォーム
@@ -100,16 +99,16 @@ public class AdministratorController {
 	 *            エラー情報格納用オブッジェクト
 	 * @return ログイン後の従業員一覧画面
 	 */
-//	@RequestMapping("/login")
-//	public String login(LoginForm form, BindingResult result) {
-//		Administrator administrator = administratorService.login(form.getMailAddress(), form.getPassword());
-//		if (administrator == null) {
-//			result.addError(new ObjectError("loginError", "メールアドレスまたはパスワードが不正です。"));
-//			return toLogin();
-//		}
-//		session.setAttribute("administratorName", administrator.getName());
-//		return "forward:/employee/showList";
-//	}
+	@RequestMapping("/login")
+	public String login(LoginForm form, BindingResult result, Model model) {
+		Administrator administrator = administratorService.login(form.getMailAddress(), form.getPassword());
+		if (administrator == null) {
+			result.addError(new ObjectError("loginError", "メールアドレスまたはパスワードが不正です。"));
+			return toLogin();
+		}
+		session.setAttribute("administratorName", administrator.getName());
+		return "forward:/employee/showList";
+	}
 	
 	/////////////////////////////////////////////////////
 	// ユースケース：ログアウトをする
@@ -119,10 +118,10 @@ public class AdministratorController {
 	 * 
 	 * @return ログイン画面
 	 */
-//	@RequestMapping(value = "/logout")
-//	public String logout() {
-//		session.invalidate();
-//		return "redirect:/";
-//	}
+	@RequestMapping(value = "/logout")
+	public String logout() {
+		session.invalidate();
+		return "redirect:/";
+	}
 	
 }
