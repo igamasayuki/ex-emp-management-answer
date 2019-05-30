@@ -24,7 +24,7 @@ public class EmployeeRepository {
 	/**
 	 * Employeeオブジェクトを生成するローマッパー.
 	 */
-	private static final RowMapper<Employee> EMPLOYEE_ROW_MAPPER = (rs, i) -> {
+	public static final RowMapper<Employee> EMPLOYEE_ROW_MAPPER = (rs, i) -> {
 		Employee employee = new Employee();
 		employee.setId(rs.getInt("id"));
 		employee.setName(rs.getString("name"));
