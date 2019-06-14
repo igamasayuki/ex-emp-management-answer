@@ -96,7 +96,7 @@ public class AdministratorController {
 	 * @param form
 	 *            管理者情報用フォーム
 	 * @param result
-	 *            エラー情報格納用オブッジェクト
+	 *            エラー情報格納用オブジェクト
 	 * @return ログイン後の従業員一覧画面
 	 */
 	@RequestMapping("/login")
