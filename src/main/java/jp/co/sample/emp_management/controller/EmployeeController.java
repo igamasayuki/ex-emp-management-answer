@@ -86,10 +86,12 @@ public class EmployeeController {
 		if(result.hasErrors()) {
 			return showDetail(form.getId(), model);
 		}
-		Employee employee = new Employee();
-		employee.setId(form.getIntId());
+		
+		Employee employee = employeeService.showDetail(Integer.parseInt(form.getId()));
 		employee.setDependentsCount(form.getIntDependentsCount());
+		
 		employeeService.update(employee);
+		
 		return "redirect:/employee/showList";
 	}
 }
