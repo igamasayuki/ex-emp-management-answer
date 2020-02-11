@@ -27,8 +27,8 @@ public class EmployeeRepositoryTest {
 		List<Employee> employeeList = employeeRepository.findAll();
 		
 		assertThat("件数が一致しません", employeeList.size(), is(22));
-		assertThat("誕生日順に並んでいません", employeeList.get(0).getName(), is("渡辺三郎"));
-		assertThat("誕生日順に並んでいません", employeeList.get(21).getName(), is("加藤十子"));
+		assertThat("入社日順に並んでいません", employeeList.get(0).getName(), is("渡辺三郎"));
+		assertThat("入社日順に並んでいません", employeeList.get(21).getName(), is("加藤十子"));
 		
 		System.out.println("全件検索するテスト終了");
 	}
