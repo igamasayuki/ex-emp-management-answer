@@ -1,12 +1,10 @@
 package jp.co.sample.emp_management.repository;
 
-//Matcher関連メソッドを利用するためのstaticインポート
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,7 +24,7 @@ public class AdministratorRepositoryTest {
 	@Autowired
 	private NamedParameterJdbcTemplate template;
 
-	@Before
+	@BeforeAll
 	public void testInsert() {
 		System.out.println("DB初期化処理開始");
 		Administrator administrator = new Administrator();
@@ -47,9 +45,9 @@ public class AdministratorRepositoryTest {
 				Integer.class);
 		Administrator resultAdministrator = administratorRepository.load(maxId);
 
-		assertThat("名前が登録されていません", resultAdministrator.getName(), is("伊賀将之"));
-		assertThat("メールアドレスが登録されていません", resultAdministrator.getMailAddress(), is("iga@sample.com"));
-		assertThat("パスワードが登録されていません", resultAdministrator.getPassword(), is("testtest"));
+		assertEquals("伊賀将之", resultAdministrator.getName(), "名前が登録されていません");
+		assertEquals("iga@sample.com", resultAdministrator.getMailAddress(), "メールアドレスが登録されていません");
+		assertEquals("testtest", resultAdministrator.getPassword(), "パスワードが登録されていません");
 		
 		System.out.println("主キー検索するテスト終了");
 	}
@@ -59,13 +57,15 @@ public class AdministratorRepositoryTest {
 		System.out.println("メールアドレスとパスワードで検索するテスト開始");
 		Administrator resultAdministrator = administratorRepository.findByMailAddressAndPassward("iga@sample.com",
 				"testtest");
-		assertThat("名前が検索されていません", resultAdministrator.getName(), is("伊賀将之"));
-		assertThat("メールアドレスが検索されていません", resultAdministrator.getMailAddress(), is("iga@sample.com"));
-		assertThat("パスワードが検索されていません", resultAdministrator.getPassword(), is("testtest"));
+		
+		assertEquals("伊賀将之", resultAdministrator.getName(), "名前が登録されていません");
+		assertEquals("iga@sample.com", resultAdministrator.getMailAddress(), "メールアドレスが登録されていません");
+		assertEquals("testtest", resultAdministrator.getPassword(), "パスワードが登録されていません");
+		
 		System.out.println("メールアドレスとパスワードで検索するテスト終了");
 	}
 
-	@After
+	@AfterAll
 	public void tearDownAfterClass() throws Exception {
 		MapSqlParameterSource param = new MapSqlParameterSource().addValue("mailAddress", "iga@sample.com");
 		template.update("delete from administrators where mail_address = :mailAddress", param);

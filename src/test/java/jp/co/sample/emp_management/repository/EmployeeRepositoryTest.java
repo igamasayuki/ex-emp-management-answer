@@ -1,7 +1,6 @@
 package jp.co.sample.emp_management.repository;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
@@ -26,9 +25,9 @@ public class EmployeeRepositoryTest {
 		
 		List<Employee> employeeList = employeeRepository.findAll();
 		
-		assertThat("件数が一致しません", employeeList.size(), is(22));
-		assertThat("入社日順に並んでいません", employeeList.get(0).getName(), is("渡辺三郎"));
-		assertThat("入社日順に並んでいません", employeeList.get(21).getName(), is("加藤十子"));
+		assertEquals(22, employeeList.size(), "件数が一致しません");
+		assertEquals("渡辺三郎", employeeList.get(0).getName(), "入社日順に並んでいません");
+		assertEquals("加藤十子", employeeList.get(21).getName(), "入社日順に並んでいません");
 		
 		System.out.println("全件検索するテスト終了");
 	}
