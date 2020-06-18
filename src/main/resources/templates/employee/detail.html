@@ -85,10 +85,11 @@
 							      写真
 							    </th>
 							    <td>
-							      <img src="../../static/img/e2.png" th:src="${'/img/' + employee.image}" />
-							      <!-- 以下の２つでも同じ動きをします -->
-<!-- 							      <img src="../../static/img/e2.png" th:src="'/img/' +${employee.image}" /> -->
-<!-- 							      <img src="../../static/img/e2.png" th:src="@{'/img/' + ${employee.image}}" /> -->
+							      <img src="../../static/img/e2.png" th:src="@{/img/} + ${employee.image}" >
+							      <!-- 以下の３つでも同じ動きをします -->
+<!-- 							      <img src="../../static/img/e2.png" th:src="${'/img/' + employee.image}" > -->
+<!-- 							      <img src="../../static/img/e2.png" th:src="'/img/' +${employee.image}" > -->
+<!-- 							      <img src="../../static/img/e2.png" th:src="@{'/img/' + ${employee.image}}" > -->
 							    </td>
 							  </tr>
 							  <tr>
