@@ -5,11 +5,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>jp.co.sample.emp_management</groupId>
-	<artifactId>ex-crm-answer</artifactId>
+	<artifactId>ex-emp-management-answer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
-	<name>ex-emp-manage-answer</name>
+	<name>ex-emp-management-answer</name>
 	<description>sample</description>
 
 	<parent>
@@ -72,6 +72,12 @@
 			<artifactId>junit-jupiter-engine</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- デプロイ用Tomcat関連 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -81,6 +87,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<finalName>ex-emp</finalName>
 	</build>
 
 
