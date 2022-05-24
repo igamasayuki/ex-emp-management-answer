@@ -42,7 +42,6 @@ public class AdministratorController {
 		return new InsertAdministratorForm();
 	}
 
-	// (SpringSecurityに任せるためコメントアウトしました)
 	@ModelAttribute
 	public LoginForm setUpLoginForm() {
 		return new LoginForm();
