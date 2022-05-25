@@ -8,7 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.sample.emp_management.domain.Administrator;
@@ -32,20 +33,6 @@ public class AdministratorController {
 	@Autowired
 	private HttpSession session;
 
-	/**
-	 * 使用するフォームオブジェクトをリクエストスコープに格納する.
-	 * 
-	 * @return フォーム
-	 */
-	@ModelAttribute
-	public InsertAdministratorForm setUpInsertAdministratorForm() {
-		return new InsertAdministratorForm();
-	}
-
-	@ModelAttribute
-	public LoginForm setUpLoginForm() {
-		return new LoginForm();
-	}
 
 	/////////////////////////////////////////////////////
 	// ユースケース：管理者を登録する
@@ -53,10 +40,11 @@ public class AdministratorController {
 	/**
 	 * 管理者登録画面を出力します.
 	 * 
+	 * @param form フォーム
 	 * @return 管理者登録画面
 	 */
-	@RequestMapping("/toInsert")
-	public String toInsert() {
+	@GetMapping("/toInsert")
+	public String toInsert(InsertAdministratorForm form) {
 		return "administrator/insert";
 	}
 
@@ -66,7 +54,7 @@ public class AdministratorController {
 	 * @param form 管理者情報用フォーム
 	 * @return ログイン画面へリダイレクト
 	 */
-	@RequestMapping("/insert")
+	@PostMapping("/insert")
 	public String insert(InsertAdministratorForm form) {
 		Administrator administrator = new Administrator();
 		// フォームからドメインにプロパティ値をコピー
@@ -81,10 +69,11 @@ public class AdministratorController {
 	/**
 	 * ログイン画面を出力します.
 	 * 
+	 * @param form フォーム
 	 * @return ログイン画面
 	 */
-	@RequestMapping("/")
-	public String toLogin() {
+	@GetMapping("/")
+	public String toLogin(LoginForm form) {
 		return "administrator/login";
 	}
 
@@ -95,16 +84,16 @@ public class AdministratorController {
 	 * @param result エラー情報格納用オブジェクト
 	 * @return ログイン後の従業員一覧画面
 	 */
-	@RequestMapping("/login")
+	@PostMapping("/login")
 	public String login(LoginForm form, BindingResult result, Model model) {
 		Administrator administrator = administratorService.login(form.getMailAddress(), form.getPassword());
 		if (administrator == null) {
 			result.addError(new ObjectError("", "メールアドレスまたはパスワードが不正です。"));
 //			model.addAttribute("errorMessage", "メールアドレスまたはパスワードが間違っています");
-			return toLogin();
+			return toLogin(form);
 		}
 		session.setAttribute("administratorName", administrator.getName());
-		return "forward:/employee/showList";
+		return "redirect:/employee/showList";
 	}
 
 	/////////////////////////////////////////////////////
@@ -115,7 +104,7 @@ public class AdministratorController {
 	 * 
 	 * @return ログイン画面
 	 */
-	@RequestMapping(value = "/logout")
+	@GetMapping(value = "/logout")
 	public String logout() {
 		session.invalidate();
 		return "redirect:/";
