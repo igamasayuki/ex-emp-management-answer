@@ -82,9 +82,11 @@ public class EmployeeRepository {
 
 		StringBuilder updateSqlBuilder = new StringBuilder("UPDATE employees ");
 		updateSqlBuilder.append("SET name = :name, image = :image, gender = :gender, hire_date = :hireDate, ");
-		updateSqlBuilder.append("mail_address = :mailAddress, zip_code = :zipCode, address = :address, telephone = :telephone, ");
-		updateSqlBuilder.append("salary = :salary, characteristics = :characteristics, dependents_count=:dependentsCount WHERE id=:id");
-		
+		updateSqlBuilder.append(
+				"mail_address = :mailAddress, zip_code = :zipCode, address = :address, telephone = :telephone, ");
+		updateSqlBuilder.append(
+				"salary = :salary, characteristics = :characteristics, dependents_count=:dependentsCount WHERE id=:id");
+
 		template.update(updateSqlBuilder.toString(), param);
 	}
 }

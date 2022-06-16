@@ -40,7 +40,7 @@ public class AdministratorRepository {
 	 * 主キーから管理者情報を取得します.
 	 * 
 	 * @param id ID
-	 * @return 管理者情報 
+	 * @return 管理者情報
 	 * @throws EmptyDataAccessException 存在しない場合は例外を発生します
 	 */
 	public Administrator load(Integer id) {
@@ -49,7 +49,7 @@ public class AdministratorRepository {
 		Administrator administrator = template.queryForObject(sql, param, ADMINISTRATOR_ROW_MAPPER);
 		return administrator;
 	}
-	
+
 	/**
 	 * メールアドレスとパスワードから管理者情報を取得します.
 	 * 

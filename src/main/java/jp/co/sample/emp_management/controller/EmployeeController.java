@@ -52,7 +52,7 @@ public class EmployeeController {
 	 * 
 	 * @param id    リクエストパラメータで送られてくる従業員ID
 	 * @param model モデル
-	 * @param form フォーム
+	 * @param form  フォーム
 	 * @return 従業員詳細画面
 	 */
 	@GetMapping("/showDetail")
