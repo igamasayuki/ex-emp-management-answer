@@ -84,11 +84,10 @@ public class AdministratorController {
 	 * @return ログイン後の従業員一覧画面
 	 */
 	@PostMapping("/login")
-	public String login(LoginForm form, BindingResult result, Model model) {
+	public String login(LoginForm form, Model model) {
 		Administrator administrator = administratorService.login(form.getMailAddress(), form.getPassword());
 		if (administrator == null) {
-			result.addError(new ObjectError("", "メールアドレスまたはパスワードが不正です。"));
-//			model.addAttribute("errorMessage", "メールアドレスまたはパスワードが間違っています");
+			model.addAttribute("errorMessage", "メールアドレスまたはパスワードが間違っています");
 			return toLogin(form);
 		}
 		session.setAttribute("administratorName", administrator.getName());
