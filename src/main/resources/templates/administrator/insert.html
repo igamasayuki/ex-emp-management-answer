@@ -58,7 +58,6 @@
                     <div class="col-sm-12">
                       <label for="name"> 氏名: </label>
                       <label
-                        th:if="${#fields.hasErrors('name')}"
                         th:errors="*{name}"
                         class="error-messages"
                       >
@@ -83,7 +82,6 @@
                     <div class="col-sm-12">
                       <label for="mailAddress"> メールアドレス: </label>
                       <label
-                        th:if="${#fields.hasErrors('mailAddress')}"
                         th:errors="*{mailAddress}"
                         class="error-messages"
                       >
@@ -106,9 +104,8 @@
                 <div class="form-group">
                   <div class="row">
                     <div class="col-sm-12">
-                      <label for="passwaord"> パスワード: </label>
+                      <label for="password"> パスワード: </label>
                       <label
-                        th:if="${#fields.hasErrors('password')}"
                         th:errors="*{password}"
                         class="error-messages"
                       >
