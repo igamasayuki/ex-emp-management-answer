@@ -33,8 +33,12 @@ public class AdministratorRepository {
 		return administrator;
 	};
 
+	private final NamedParameterJdbcTemplate template;
+
 	@Autowired
-	private NamedParameterJdbcTemplate template;
+	public AdministratorRepository(NamedParameterJdbcTemplate template){
+		this.template = template;
+	}
 
 	/**
 	 * 主キーから管理者情報を取得します.

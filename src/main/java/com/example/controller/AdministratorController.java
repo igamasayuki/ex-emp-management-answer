@@ -25,11 +25,15 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("/")
 public class AdministratorController {
 
-	@Autowired
-	private AdministratorService administratorService;
+	private final AdministratorService administratorService;
+
+	private final HttpSession session;
 
 	@Autowired
-	private HttpSession session;
+	public AdministratorController(AdministratorService administratorService, HttpSession session) {
+		this.administratorService = administratorService;
+		this.session = session;
+	}
 
 	/////////////////////////////////////////////////////
 	// ユースケース：管理者を登録する

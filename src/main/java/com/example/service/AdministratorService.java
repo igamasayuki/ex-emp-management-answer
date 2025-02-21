@@ -17,8 +17,12 @@ import com.example.repository.AdministratorRepository;
 @Transactional
 public class AdministratorService {
 
+	private final AdministratorRepository administratorRepository;
+
 	@Autowired
-	private AdministratorRepository administratorRepository;
+	public AdministratorService(AdministratorRepository administratorRepository) {
+		this.administratorRepository = administratorRepository;
+	}
 
 	/**
 	 * 管理者情報を登録します.

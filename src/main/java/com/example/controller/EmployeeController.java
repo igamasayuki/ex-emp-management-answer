@@ -25,8 +25,12 @@ import com.example.service.EmployeeService;
 @RequestMapping("/employee")
 public class EmployeeController {
 
+	private final EmployeeService employeeService;
+
 	@Autowired
-	private EmployeeService employeeService;
+	public EmployeeController(EmployeeService employeeService) {
+		this.employeeService = employeeService;
+	}
 
 	/////////////////////////////////////////////////////
 	// ユースケース：従業員一覧を表示する

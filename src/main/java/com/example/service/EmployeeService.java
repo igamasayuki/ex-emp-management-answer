@@ -19,8 +19,12 @@ import com.example.repository.EmployeeRepository;
 @Transactional
 public class EmployeeService {
 
+	private final EmployeeRepository employeeRepository;
+
 	@Autowired
-	private EmployeeRepository employeeRepository;
+	public EmployeeService(EmployeeRepository employeeRepository) {
+		this.employeeRepository = employeeRepository;
+	}
 
 	/**
 	 * 従業員情報を全件取得します.
