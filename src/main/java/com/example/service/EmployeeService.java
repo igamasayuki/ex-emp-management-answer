@@ -21,7 +21,6 @@ public class EmployeeService {
 
 	private final EmployeeRepository employeeRepository;
 
-	@Autowired
 	public EmployeeService(EmployeeRepository employeeRepository) {
 		this.employeeRepository = employeeRepository;
 	}
@@ -41,7 +40,6 @@ public class EmployeeService {
 	 * 
 	 * @param id ID
 	 * @return 従業員情報
-	 * @throws 検索されない場合は例外が発生します
 	 */
 	public Employee showDetail(Integer id) {
 		Employee employee = employeeRepository.load(id);

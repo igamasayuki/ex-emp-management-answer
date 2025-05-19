@@ -29,7 +29,6 @@ public class AdministratorController {
 
 	private final HttpSession session;
 
-	@Autowired
 	public AdministratorController(AdministratorService administratorService, HttpSession session) {
 		this.administratorService = administratorService;
 		this.session = session;
@@ -82,7 +81,6 @@ public class AdministratorController {
 	 * ログインします.
 	 * 
 	 * @param form   管理者情報用フォーム
-	 * @param result エラー情報格納用オブジェクト
 	 * @return ログイン後の従業員一覧画面
 	 */
 	@PostMapping("/login")

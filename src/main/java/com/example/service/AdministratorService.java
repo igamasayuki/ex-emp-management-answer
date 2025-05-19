@@ -19,7 +19,6 @@ public class AdministratorService {
 
 	private final AdministratorRepository administratorRepository;
 
-	@Autowired
 	public AdministratorService(AdministratorRepository administratorRepository) {
 		this.administratorRepository = administratorRepository;
 	}
@@ -40,8 +39,8 @@ public class AdministratorService {
 	 * @param password    パスワード
 	 * @return 管理者情報 存在しない場合はnullが返ります
 	 */
-	public Administrator login(String mailAddress, String passward) {
-		Administrator administrator = administratorRepository.findByMailAddressAndPassward(mailAddress, passward);
+	public Administrator login(String mailAddress, String password) {
+		Administrator administrator = administratorRepository.findByMailAddressAndPassward(mailAddress, password);
 		return administrator;
 	}
 }

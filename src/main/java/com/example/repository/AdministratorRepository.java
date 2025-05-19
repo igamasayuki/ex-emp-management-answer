@@ -35,7 +35,6 @@ public class AdministratorRepository {
 
 	private final NamedParameterJdbcTemplate template;
 
-	@Autowired
 	public AdministratorRepository(NamedParameterJdbcTemplate template){
 		this.template = template;
 	}
@@ -45,7 +44,6 @@ public class AdministratorRepository {
 	 * 
 	 * @param id ID
 	 * @return 管理者情報
-	 * @throws EmptyDataAccessException 存在しない場合は例外を発生します
 	 */
 	public Administrator load(Integer id) {
 		String sql = "select id,name,mail_address,password from administrators where id=:id";
