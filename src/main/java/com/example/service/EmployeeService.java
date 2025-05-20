@@ -2,7 +2,6 @@ package com.example.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,8 +30,7 @@ public class EmployeeService {
 	 * @return 従業員情報一覧
 	 */
 	public List<Employee> showList() {
-		List<Employee> employeeList = employeeRepository.findAll();
-		return employeeList;
+        return employeeRepository.findAll();
 	}
 
 	/**
@@ -42,8 +40,7 @@ public class EmployeeService {
 	 * @return 従業員情報
 	 */
 	public Employee showDetail(Integer id) {
-		Employee employee = employeeRepository.load(id);
-		return employee;
+        return employeeRepository.findById(id);
 	}
 
 	/**

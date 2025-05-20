@@ -2,7 +2,6 @@ package com.example.repository;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -24,7 +23,7 @@ public class AdministratorRepository {
 	/**
 	 * Administratorオブジェクトを生成するローマッパー.
 	 */
-	public static final RowMapper<Administrator> ADMINISTRATOR_ROW_MAPPER = (rs, i) -> {
+	private static final RowMapper<Administrator> ADMINISTRATOR_ROW_MAPPER = (rs, i) -> {
 		Administrator administrator = new Administrator();
 		administrator.setId(rs.getInt("id"));
 		administrator.setName(rs.getString("name"));
@@ -45,11 +44,10 @@ public class AdministratorRepository {
 	 * @param id ID
 	 * @return 管理者情報
 	 */
-	public Administrator load(Integer id) {
+	public Administrator findById(Integer id) {
 		String sql = "select id,name,mail_address,password from administrators where id=:id";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
-		Administrator administrator = template.queryForObject(sql, param, ADMINISTRATOR_ROW_MAPPER);
-		return administrator;
+        return template.queryForObject(sql, param, ADMINISTRATOR_ROW_MAPPER);
 	}
 
 	/**
@@ -67,7 +65,7 @@ public class AdministratorRepository {
 		if (administratorList.isEmpty()) {
 			return null;
 		}
-		return administratorList.get(0);
+		return administratorList.getFirst();
 	}
 
 	/**
@@ -94,7 +92,7 @@ public class AdministratorRepository {
 		if (administratorList.isEmpty()) {
 			return null;
 		}
-		return administratorList.get(0);
+		return administratorList.getFirst();
 	}
 
 }

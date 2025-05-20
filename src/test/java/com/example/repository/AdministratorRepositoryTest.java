@@ -40,7 +40,7 @@ class AdministratorRepositoryTest {
 
 		Integer maxId = template.queryForObject("select max(id) from administrators;", new MapSqlParameterSource(),
 				Integer.class);
-		Administrator resultAdministrator = administratorRepository.load(maxId);
+		Administrator resultAdministrator = administratorRepository.findById(maxId);
 
 		assertEquals("伊賀将之", resultAdministrator.getName(), "名前が登録されていません");
 		assertEquals("igaiga@sample.com", resultAdministrator.getMailAddress(), "メールアドレスが登録されていません");
