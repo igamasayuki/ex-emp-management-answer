@@ -39,7 +39,7 @@ public class EmployeeController {
 	 * @param model モデル
 	 * @return 従業員一覧画面
 	 */
-	@GetMapping("/showList")
+	@GetMapping("/show-list")
 	public String showList(Model model) {
 		List<Employee> employeeList = employeeService.showList();
 		model.addAttribute("employeeList", employeeList);
@@ -57,7 +57,7 @@ public class EmployeeController {
 	 * @param form  フォーム
 	 * @return 従業員詳細画面
 	 */
-	@GetMapping("/showDetail")
+	@GetMapping("/show-detail")
 	public String showDetail(String id, Model model, UpdateEmployeeForm form) {
 		Employee employee = employeeService.showDetail(Integer.parseInt(id));
 		model.addAttribute("employee", employee);

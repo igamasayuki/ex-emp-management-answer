@@ -42,7 +42,7 @@ public class AdministratorController {
 	 * @param form フォーム
 	 * @return 管理者登録画面
 	 */
-	@GetMapping("/toInsert")
+	@GetMapping("/to-insert")
 	public String toInsert(InsertAdministratorForm form) {
 		return "administrator/insert";
 	}

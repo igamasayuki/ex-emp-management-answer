@@ -44,7 +44,7 @@
             <a
               class="navbar-brand"
               href="list.html"
-              th:href="@{/employee/showList}"
+              th:href="@{/employee/show-list}"
             >
               <!-- 企業ロゴ -->
               <img
@@ -61,7 +61,7 @@
           >
             <ul class="nav navbar-nav">
               <li class="active">
-                <a href="list.html" th:href="@{/employee/showList}"
+                <a href="list.html" th:href="@{/employee/show-list}"
                   >従業員管理</a
                 >
               </li>
@@ -85,7 +85,7 @@
       <!-- パンくずリスト -->
       <ol class="breadcrumb">
         <li class="active">
-          <a href="list.html" th:href="@{/employee/showList}">従業員リスト</a>
+          <a href="list.html" th:href="@{/employee/show-list}">従業員リスト</a>
         </li>
       </ol>
 
@@ -111,15 +111,15 @@
                 <td>
                   <a
                     href="detail.html"
-                    th:href="@{/employee/showDetail?id=} + ${employee.id}"
+                    th:href="@{/employee/show-detail?id=} + ${employee.id}"
                   >
                     <span th:text="${employee.name}">山田太郎</span>
                   </a>
                   <!-- 以下の２つでも同じ動きをします -->
-                  <!-- 								<a href="detail.html" th:href="@{${'/employee/showDetail?id=' + employee.id}}"> -->
+                  <!-- 								<a href="detail.html" th:href="@{${'/employee/show-detail?id=' + employee.id}}"> -->
                   <!-- 									<span th:text="${employee.name}">山田太郎</span> -->
                   <!-- 								</a> -->
-                  <!-- 								<a href="detail.html" th:href="${'/employee/showDetail?id=' + employee.id}"> -->
+                  <!-- 								<a href="detail.html" th:href="${'/employee/show-detail?id=' + employee.id}"> -->
                   <!-- 									<span th:text="${employee.name}">山田太郎</span> -->
                   <!-- 								</a> -->
                 </td>
