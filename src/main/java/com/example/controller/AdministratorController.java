@@ -90,7 +90,7 @@ public class AdministratorController {
 			return toLogin(form);
 		}
 		session.setAttribute("administratorName", administrator.getName());
-		return "redirect:/employee/showList";
+		return "redirect:/employee/show-list";
 	}
 
 	/////////////////////////////////////////////////////
