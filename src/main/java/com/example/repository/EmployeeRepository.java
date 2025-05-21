@@ -52,9 +52,14 @@ public class EmployeeRepository {
 	 * @return 全従業員一覧 従業員が存在しない場合はサイズ0件の従業員一覧を返します
 	 */
 	public List<Employee> findAll() {
-		String sql = "SELECT id,name,image,gender,hire_date,mail_address,zip_code,address,telephone,salary,characteristics,dependents_count FROM employees ORDER BY hire_date DESC";
+		String sql = """
+                SELECT id, name, image, gender, hire_date, mail_address, zip_code,
+                       address, telephone, salary, characteristics, dependents_count
+                  FROM employees
+                 ORDER BY hire_date DESC
+                """;
 
-        return template.query(sql, EMPLOYEE_ROW_MAPPER);
+		return template.query(sql, EMPLOYEE_ROW_MAPPER);
 	}
 
 	/**
@@ -64,11 +69,15 @@ public class EmployeeRepository {
 	 * @return 検索された従業員情報
 	 */
 	public Employee findById(Integer id) {
-		String sql = "SELECT id,name,image,gender,hire_date,mail_address,zip_code,address,telephone,salary,characteristics,dependents_count FROM employees WHERE id=:id";
+		String sql = """
+                SELECT id, name, image, gender, hire_date, mail_address, zip_code,
+                       address, telephone, salary, characteristics, dependents_count
+                  FROM employees
+                 WHERE id = :id
+                """;
 
 		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
-
-        return template.queryForObject(sql, param, EMPLOYEE_ROW_MAPPER);
+		return template.queryForObject(sql, param, EMPLOYEE_ROW_MAPPER);
 	}
 
 	/**
@@ -77,13 +86,22 @@ public class EmployeeRepository {
 	public void update(Employee employee) {
 		SqlParameterSource param = new BeanPropertySqlParameterSource(employee);
 
-		StringBuilder updateSqlBuilder = new StringBuilder("UPDATE employees ");
-		updateSqlBuilder.append("SET name = :name, image = :image, gender = :gender, hire_date = :hireDate, ");
-		updateSqlBuilder.append(
-				"mail_address = :mailAddress, zip_code = :zipCode, address = :address, telephone = :telephone, ");
-		updateSqlBuilder.append(
-				"salary = :salary, characteristics = :characteristics, dependents_count=:dependentsCount WHERE id=:id");
+		String sql = """
+                UPDATE employees
+                   SET name = :name,
+                       image = :image,
+                       gender = :gender,
+                       hire_date = :hireDate,
+                       mail_address = :mailAddress,
+                       zip_code = :zipCode,
+                       address = :address,
+                       telephone = :telephone,
+                       salary = :salary,
+                       characteristics = :characteristics,
+                       dependents_count = :dependentsCount
+                 WHERE id = :id
+                """;
 
-		template.update(updateSqlBuilder.toString(), param);
+		template.update(sql, param);
 	}
 }
